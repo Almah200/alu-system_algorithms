@@ -1,7 +1,5 @@
 #ifndef _HEAP_H_
 #define _HEAP_H_
-#include "heap.h"
-
 
 /**
  * struct binary_tree_node_s - Binary tree node data structure
@@ -13,10 +11,10 @@
  */
 typedef struct binary_tree_node_s
 {
-	void *data;
-	struct binary_tree_node_s *left;
-	struct binary_tree_node_s *right;
-	struct binary_tree_node_s *parent;
+    void *data;
+    struct binary_tree_node_s *left;
+    struct binary_tree_node_s *right;
+    struct binary_tree_node_s *parent;
 } binary_tree_node_t;
 
 #endif /* _HEAP_H_ */
