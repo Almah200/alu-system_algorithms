@@ -1,4 +1,5 @@
 #include "heap.h"
+#include <stddef.h>
 
 typedef struct HeapNode {
     void *data;
@@ -10,8 +11,17 @@ typedef struct Heap {
     int (*data_cmp)(void *, void *);
 } heap_t;
 
-heap_t *heap_create(int (*data_cmp)(void *, void *)) {
+heap_t *heap_create() {
+    heap_t *new_heap = malloc(sizeof(heap_t));
+    if (new_heap == NULL) {
+        
+        return NULL;
+    }
+
+    
+    new_heap->size = 0;
     
 
-    return NULL; 
+    return new_heap;
 }
+
