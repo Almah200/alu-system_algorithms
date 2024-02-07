@@ -36,6 +36,7 @@ int main(void)
         fprintf(stderr, "Failed to create the heap\n");
         return (EXIT_FAILURE);
     }
+    printf("Heap size: %lu\n", heap->size);
     printf("Heap root: %p\n", (void *)heap->root);
     return (EXIT_SUCCESS);
 }
