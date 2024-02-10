@@ -30,7 +30,7 @@ static void print_free_path(queue_t *path)
  * maze before finding a path.
  * Don't use backtracking. Backtracking is bad.
  */
-int main(void)
+int main_backtracking(void)
 {
     char *map[21] = {
         "111111111111111111111",
