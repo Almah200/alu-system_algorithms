@@ -8,9 +8,13 @@ typedef struct queue_node {
     struct queue_node *next;
 } queue_node_t;
 
+// Define queue_t
 typedef struct queue {
     queue_node_t *front;
     queue_node_t *rear;
 } queue_t;
+
+// Declare dequeue function
+void *dequeue(queue_t *queue);
 
 #endif
