@@ -3,18 +3,18 @@
 
 #include <stddef.h>
 
-typedef struct queue_node {
+typedef struct queue_t {
     void *ptr;
-    struct queue_node *next;
+    struct queue_t *next;
 } queue_node_t;
 
-// Define queue_t
+
 typedef struct queue {
     queue_node_t *front;
     queue_node_t *rear;
 } queue_t;
 
-// Declare dequeue function
+
 void *dequeue(queue_t *queue);
 
 #endif
