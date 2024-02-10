@@ -1,52 +1,70 @@
 #include "pathfinding.h"
-#include <stdlib.h>  
-
-#include "pathfinding.h"
-#include "queues.h"
+#include <stdio.h>
 #include <stdlib.h>
 
-
-queue_t *backtracking_array(char **map, int rows, int cols, point_t const *start, point_t const *target) {
-    queue_t *path = (queue_t *)malloc(sizeof(queue_t));
-    path->front = path->rear = NULL;
-
-    int **visited = (int **)malloc(rows * sizeof(int *));
-    for (int i = 0; i < rows; i++) {
-        visited[i] = (int *)malloc(cols * sizeof(int));
-        for (int j = 0; j < cols; j++) {
-            visited[i][j] = 0;
-        }
+/**
+ * print_free_path - Unstacks the queue to discover the path from the starting
+ * vertex to the target vertex. Also deallocates the queue.
+ *
+ * @path: Queue containing the path
+ */
+static void print_free_path(queue_t *path)
+{
+    printf("Path found:\n");
+    while (path->front)
+    {
+        point_t *point = (point_t *)dequeue(path);
+        printf(" [%d, %d]\n", point->x, point->y);
+        free(point);
     }
-
-    if (backtrack(map, rows, cols, start->x, start->y, target, path, visited)) {
-        return path;
-    } else {
-        free(path);
-        return NULL;
-    }
+    free(path);
 }
 
-int backtrack(char **map, int rows, int cols, int row, int col, point_t const *target, queue_t *path, int **visited) {
-    if (row < 0 || row >= rows || col < 0 || col >= cols || map[row][col] == '1' || visited[row][col] == 1) {
-        return 0;
+/**
+ * main - Backtracking using an array. Here the array is chosen to demonstrate
+ * that Backtracking is a really bad algorithm. The target point is just
+ * down-right from the starting point, but since we first check the right cell,
+ * then top, then left, then bottom, our algo will almost go through the whole
+ * maze before finding a path.
+ * Don't use backtracking. Backtracking is bad.
+ */
+int main(void)
+{
+    char *map[21] = {
+        "111111111111111111111",
+        "101000000000001000001",
+        "101011111111101110101",
+        "100010000010001000101",
+        "111111111010111011101",
+        "101000000010100010001",
+        "101011111010111011111",
+        "101000001010001000001",
+        "101110111011101111101",
+        "101000001000100000101",
+        "101011111110111110101",
+        "101000000010000010001",
+        "101111101111101111101",
+        "000000001000001000001",
+        "111011111010101011111",
+        "100010100010101000001",
+        "101110101111111110111",
+        "100000101000000000001",
+        "101111101011111111101",
+        "100000100000000010001",
+        "111110111111111111111"
+    };
+    point_t start = { 0, 13 };
+    point_t target = { 5, 20 };
+    queue_t *path;
+
+    path = backtracking_array((char **)map, 21, 21, &start, &target);
+    if (!path)
+    {
+        fprintf(stderr, "Failed to retrieve path\n");
+        return (EXIT_FAILURE);
     }
 
-    visited[row][col] = 1;
+    print_free_path(path);
 
-    point_t current_point = {row, col};
-    enqueue(path, current_point);
-
-    if (row == target->x && col == target->y) {
-        return 1;
-    }
-
-    if (backtrack(map, rows, cols, row, col + 1, target, path, visited) ||
-        backtrack(map, rows, cols, row + 1, col, target, path, visited) ||
-        backtrack(map, rows, cols, row, col - 1, target, path, visited) ||
-        backtrack(map, rows, cols, row - 1, col, target, path, visited)) {
-        return 1;
-    }
-
-    dequeue(path);
-    return 0;
+    return (EXIT_SUCCESS);
 }
