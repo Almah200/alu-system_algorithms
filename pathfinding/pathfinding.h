@@ -9,7 +9,7 @@ typedef struct point {
 } point_t;
 
 typedef struct pathfinding_queue {
-    int x;  // Modify the fields accordingly
+    int x; 
     int y;
 } pathfinding_queue_t;
 
