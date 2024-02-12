@@ -1,12 +1,9 @@
 #include "heap.h"
-#include <stdlib.h>
 
+heap_t *heap_create(int (*data_cmp)(void *, void *)) {
+    heap_t *new_heap = (heap_t *)malloc(sizeof(heap_t));
 
-heap_t *heap_create(int (*data_cmp)(void *, void *))
-{
-    heap_t *new_heap = malloc(sizeof(heap_t));
-    if (new_heap == NULL)
-    {
+    if (new_heap == NULL) {
         return NULL;
     }
 

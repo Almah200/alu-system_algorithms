@@ -1,20 +1,18 @@
-#ifndef _HEAP_H_
-#define _HEAP_H_
+#ifndef HEAP_H
+#define HEAP_H
 
-/**
- * struct binary_tree_node_s - Binary tree node data structure
- *
- * @data: Data stored in a node
- * @left: Pointer to the left child
- * @right: Pointer to the right child
- * @parent: Pointer to the parent node
- */
-typedef struct binary_tree_node_s
-{
-	void *data;
-	struct binary_tree_node_s *left;
-	struct binary_tree_node_s *right;
-	struct binary_tree_node_s *parent;
-} binary_tree_node_t;
+#include <stdlib.h>
 
-#endif /* _HEAP_H_ */
+typedef struct node {
+    void *data;
+} node_t;
+
+typedef struct heap {
+    node_t *root;
+    size_t size;
+    int (*data_cmp)(void *, void *);
+} heap_t;
+
+heap_t *heap_create(int (*data_cmp)(void *, void *));
+
+#endif /* HEAP_H */
