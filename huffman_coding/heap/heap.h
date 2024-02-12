@@ -7,7 +7,8 @@
  * @struct node
  * Represents a node in the heap.
  */
-typedef struct node {
+typedef struct node
+{
     void *data;
 } node_t;
 
@@ -15,7 +16,8 @@ typedef struct node {
  * @struct heap
  * Represents a heap data structure.
  */
-typedef struct heap {
+typedef struct heap
+{
     node_t *root;
     size_t size;
     int (*data_cmp)(void *, void *);
