@@ -3,11 +3,13 @@
 
 #include <stdlib.h>
 
-typedef struct node {
+typedef struct node
+{
     void *data;
 } node_t;
 
-typedef struct heap {
+typedef struct heap
+{
     node_t *root;
     size_t size;
     int (*data_cmp)(void *, void *);
