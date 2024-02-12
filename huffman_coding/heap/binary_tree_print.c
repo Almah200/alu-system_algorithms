@@ -1,7 +1,8 @@
+#ifndef BINARY_TREE_PRINT_H
+#define BINARY_TREE_PRINT_H
+
 #include "heap.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+
 
 
 /* Original code from http://stackoverflow.com/a/13755911/5184480 */
@@ -102,3 +103,4 @@ void binary_tree_print(const binary_tree_node_t *root,
 	}
 	free(s);
 }
+#endif /* BINARY_TREE_PRINT_H */
