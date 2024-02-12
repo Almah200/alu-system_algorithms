@@ -1,25 +1,31 @@
-#include "heap.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-/* Original code from http://stackoverflow.com/a/13755911/5184480 */
+/**
+ * struct binary_tree_node_s - Binary tree node data structure
+ *
+ * @data: Data stored in a node
+ * @left: Pointer to the left child
+ * @right: Pointer to the right child
+ * @parent: Pointer to the parent node
+ */
+binary_tree_node_t *binary_tree_node(binary_tree_node_t *parent, void *data);
+binary_tree_node_t *heap_insert(heap_t *heap, void *data);
+typedef struct binary_tree_node_s
+{
+    void *data;
+    struct binary_tree_node_s *left;
+    struct binary_tree_node_s *right;
+    struct binary_tree_node_s *parent;
+} binary_tree_node_t;
 
 /**
- * print_t - Stores recursively each level in an array of strings
+ * struct heap_s - Heap data structure
  *
- * @tree: Pointer to the node to print
- * @offset: Offset to print
- * @depth: Depth of the node
- * @s: Buffer
- * @print_data: Function to print the data stored in a node
- *
- * Return: length of printed tree after process
+ * @size: Size of the heap (number of nodes)
+ * @data_cmp: Function to compare two nodes data
+ * @root: Pointer to the root node of the heap
  */
-static int print_t(const binary_tree_node_t *tree, int offset, int depth,
-                   char **s, int (*print_data)(char *, void *))
+typedef struct heap_s
 {
-    // ... (rest of your code)
-}
-
-// ... (rest of your code)
+    size_t size;
+    int (*data_cmp)(void *, void *);
+    binary_tree_node_t *root;
+} heap_t;
