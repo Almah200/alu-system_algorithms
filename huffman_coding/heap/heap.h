@@ -33,4 +33,7 @@ typedef struct heap_s
     int (*data_cmp)(void *, void *);
 } heap_t;
 
+/* Function to compare integers */
+int int_cmp(void *a, void *b);
+
 #endif /* _HEAP_H_ */
