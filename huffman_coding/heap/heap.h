@@ -10,6 +10,9 @@
 typedef struct node
 {
     void *data;
+    struct node *parent;
+    struct node *left;
+    struct node *right;
 } node_t;
 
 /**

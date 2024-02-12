@@ -1,7 +1,8 @@
+#include "heap.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "heap.h"
+
 
 /* Original code from http://stackoverflow.com/a/13755911/5184480 */
 
@@ -16,7 +17,7 @@
  *
  * Return: length of printed tree after process
  */
-static int print_t(const binary_tree_node_t *tree, int offset, int depth,
+static int print_t(const node_t *tree, int offset, int depth,
 	char **s, int (*print_data)(char *, void *))
 {
 	char b[6];
@@ -52,7 +53,7 @@ static int print_t(const binary_tree_node_t *tree, int offset, int depth,
  *
  * Return: The height of the tree starting at @node
  */
-static size_t _height(const binary_tree_node_t *tree)
+static size_t _height(const node_t *tree)
 {
 	size_t height_l;
 	size_t height_r;
@@ -68,7 +69,7 @@ static size_t _height(const binary_tree_node_t *tree)
  * @root: Pointer to the heap root node
  * @print_data: Function to print the data stored in a node
  */
-void binary_tree_print(const binary_tree_node_t *root,
+void binary_tree_print(const node_t *root,
 	int (*print_data)(char *, void *))
 {
 	char **s;
