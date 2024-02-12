@@ -21,14 +21,14 @@ static void print_free_path(queue_t *path)
 }
 
 /**
- * main - Backtracking using an array. Here the array is chosen to demonstrate
+ * master - Backtracking using an array. Here the array is chosen to demonstrate
  * that Backtracking is a really bad algorithm. The target point is just
  * down-right from the starting point, but since we first check the right cell,
  * then top, then left, then bottom, our algo will almost go through the whole
  * maze before finding a path.
  * Don't use backtracking. Backtracking is bad.
  */
-int main(void)
+int master(void)
 {
     char *map[21] = {
         "111111111111111111111",
