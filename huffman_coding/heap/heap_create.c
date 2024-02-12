@@ -2,15 +2,14 @@
 #include <stdlib.h>
 
 /**
- * heap_t - function to Create a new heap.
- *heap_create - created node pointer
+ * heap_create - Creates a Heap data structure
  * @data_cmp: A pointer to a comparison function.
  * Return: Pointer to the created node
  */
 heap_t *heap_create(int (*data_cmp)(void *, void *))
 {
-    heap_t *new_heap = malloc(sizeof(heap_t));
-    if (new_heap == NULL)
+heap_t *new_heap = malloc(sizeof(heap_t));
+	if (new_heap == NULL)
 	{
 		return (NULL);
 	}
