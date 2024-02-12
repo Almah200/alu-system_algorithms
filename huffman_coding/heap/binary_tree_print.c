@@ -1,6 +1,5 @@
-// binary_tree_print.c
-
 #include "heap.h"
+
 
 int print_t(const binary_tree_node_t *tree, int depth, int (*print_data)(char *, void *), char **s)
 {

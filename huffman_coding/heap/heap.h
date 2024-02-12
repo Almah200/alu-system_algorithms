@@ -3,6 +3,7 @@
 
 #include <stddef.h>
 
+
 /**
  * struct binary_tree_node_s - Binary tree node data structure
  *
@@ -36,4 +37,4 @@ typedef struct heap_s
 /* Function to compare integers */
 int int_cmp(void *a, void *b);
 
-#endif /* _HEAP_H_ */
+#endif
