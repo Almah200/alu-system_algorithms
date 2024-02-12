@@ -31,7 +31,6 @@ binary_tree_node_t *binary_tree_node(binary_tree_node_t *parent, void *data) {
 
     return new_node;
 }
-free(new_node);
 
 /* int main() {
     binary_tree_node_t *node = binary_tree_node(NULL, (void *)42);
