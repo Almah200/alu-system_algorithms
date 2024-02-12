@@ -1,4 +1,5 @@
 #include "heap.h"
+#include <stdlib.h>
 
 /**
  * heap_insert - Inserts a value into a Min Binary Heap.
