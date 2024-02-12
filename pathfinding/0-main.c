@@ -1,26 +1,10 @@
-#include <stdlib.h>
-#include <stdio.h>
-
+// 0-main.c
 #include "pathfinding.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-
-/**
- * print_free_path - Unstacks the queue to discover the path from the starting
- * vertex to the target vertex. Also deallocates the queue.
- *
- * @path: Queue containing the path
- */
-static void print_free_path(queue_t *path)
-{
-    printf("Path found:\n");
-    while (path->front)
-    {
-        point_t *point = (point_t *)dequeue(path);
-        printf(" [%d, %d]\n", point->x, point->y);
-        free(point);
-    }
-    free(path);
-}
+// Function prototype
+static void print_free_path(queue_t *path);
 
 /**
  * main - Backtracking using an array. Here the array is chosen to demonstrate
@@ -30,7 +14,7 @@ static void print_free_path(queue_t *path)
  * maze before finding a path.
  * Don't use backtracking. Backtracking is bad.
  */
-int backtracking(void)
+int main(void)
 {
     char *map[21] = {
         "111111111111111111111",
@@ -59,6 +43,7 @@ int backtracking(void)
     point_t target = { 5, 20 };
     queue_t *path;
 
+    // Calling the correct function name
     path = backtracking_array((char **)map, 21, 21, &start, &target);
     if (!path)
     {
@@ -69,4 +54,22 @@ int backtracking(void)
     print_free_path(path);
 
     return (EXIT_SUCCESS);
+}
+
+/**
+ * print_free_path - Unstacks the queue to discover the path from the starting
+ * vertex to the target vertex. Also deallocates the queue.
+ *
+ * @path: Queue containing the path
+ */
+static void print_free_path(queue_t *path)
+{
+    printf("Path found:\n");
+    while (path->front)
+    {
+        point_t *point = (point_t *)dequeue(path);
+        printf(" [%d, %d]\n", point->x, point->y);
+        free(point);
+    }
+    free(path);
 }
