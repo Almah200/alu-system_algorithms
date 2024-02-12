@@ -1,9 +1,7 @@
-#ifndef BINARY_TREE_PRINT_H
-#define BINARY_TREE_PRINT_H
-
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "heap.h"
-
-
 
 /* Original code from http://stackoverflow.com/a/13755911/5184480 */
 
@@ -19,7 +17,7 @@
  * Return: length of printed tree after process
  */
 static int print_t(const binary_tree_node_t *tree, int offset, int depth,
-                   char **s, int (*print_data)(char *, void *))
+	char **s, int (*print_data)(char *, void *))
 {
 	char b[6];
 	int width, left, right, is_left, i;
@@ -103,4 +101,3 @@ void binary_tree_print(const binary_tree_node_t *root,
 	}
 	free(s);
 }
-#endif /* BINARY_TREE_PRINT_H */
