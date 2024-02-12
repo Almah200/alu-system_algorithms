@@ -1,40 +1,25 @@
-#ifndef HEAP_H
-#define HEAP_H
-
+#include "heap.h"
+#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
+/* Original code from http://stackoverflow.com/a/13755911/5184480 */
 
 /**
- * @struct node
- * Represents a node in the heap.
- */
-typedef struct node
-{
-    void *data;
-    struct node *parent;
-    struct node *left;
-    struct node *right;
-} node_t;
-
-/**
- * @struct heap
- * Represents a heap data structure.
- */
-typedef struct heap
-{
-    node_t *root;
-    size_t size;
-    int (*data_cmp)(void *, void *);
-
-} heap_t;
-
-/**
- * @brief Creates a new heap.
+ * print_t - Stores recursively each level in an array of strings
  *
- * This function initializes a new heap structure and returns a pointer to it.
+ * @tree: Pointer to the node to print
+ * @offset: Offset to print
+ * @depth: Depth of the node
+ * @s: Buffer
+ * @print_data: Function to print the data stored in a node
  *
- * @param data_cmp A pointer to a comparison function.
- * @return A pointer to the created heap_t structure, or NULL if it fails.
+ * Return: length of printed tree after process
  */
-heap_t *heap_create(int (*data_cmp)(void *, void *));
+static int print_t(const binary_tree_node_t *tree, int offset, int depth,
+                   char **s, int (*print_data)(char *, void *))
+{
+    // ... (rest of your code)
+}
 
-#endif /* HEAP_H */
+// ... (rest of your code)
