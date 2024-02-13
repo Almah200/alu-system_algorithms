@@ -13,13 +13,13 @@ heap_t *huffman_priority_queue(char *data, size_t *freq, size_t size)
 {
 heap_t *priority_queue = NULL;
 binary_tree_node_t *node = NULL;
-symbol_t *symbol = NULL;
+heap_t *symbol = NULL;
 size_t i;
 
 if (!data || !freq || size == 0)
 return (NULL);
 
-priority_queue = heap_create(heap_data_cmp);
+priority_queue = heap_create(*data);
 if (!priority_queue)
 return (NULL);
 
