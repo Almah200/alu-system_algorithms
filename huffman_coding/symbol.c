@@ -14,7 +14,7 @@ typedef struct symbol
 {
 char data;
 size_t freq;
-} symbol_t;
+} symbol;
 
 /**
  * symbol_create - Creates a symbol_t data structure.
@@ -25,7 +25,7 @@ size_t freq;
  */
 symbol_t *symbol_create(char data, size_t freq)
 {
-symbol_t *newSymbol = malloc(sizeof(symbol_t));
+symbol *newSymbol = malloc(sizeof(symbol_t));
 
 if (newSymbol)
 {
