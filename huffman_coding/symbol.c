@@ -3,7 +3,7 @@
 #define SYMBOL_H
 
 #include <stdlib.h>
-#include "heap/heap.h"
+#include "huffman.h"
 
 /**
  * struct symbol - Represents a symbol with associated frequency.
