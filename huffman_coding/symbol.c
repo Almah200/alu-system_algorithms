@@ -30,6 +30,8 @@ symbol_t *symbol_create(char data, size_t freq)
     {
         newSymbol->data = data;
         newSymbol->freq = freq;
-    }
+        }
+        return (newSymbol);
+}
 
 #endif /* SYMBOL_H */
