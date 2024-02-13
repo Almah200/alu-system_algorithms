@@ -90,17 +90,13 @@ else
 {
 heap->root = last;
 }
-
 heapify_down(heap);
 }
 else
 {
 heap->root = NULL;
 }
-
 free(root);
-
 heap->size--;
-
-return data;
+return (data);
 }
