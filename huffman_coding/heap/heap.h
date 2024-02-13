@@ -21,28 +21,6 @@ typedef struct binary_tree_node_s
 } binary_tree_node_t;
 
 /**
- * struct symbol - Data structure representing frequency.
- * @data: The data to be stored in the structure.
- * @freq: The frequency associated with the data.
- */
-typedef struct symbol
-{
-char data;
-size_t freq;
-} symbol_t;
-
-/**
- * heap_data_cmp - Compare two nodes based on their frequencies.
- * @node1: Pointer to the first node.
- * @node2: Pointer to the second node.
- *
- * Return: Positive value if frequency of node1 is greater,
- *         negative value if frequency of node2 is greater,
- *         or 0 if frequencies are equal.
- */
-int heap_data_cmp(void *node1, void *node2);
-
-/**
  * struct heap_s - Heap data structure
  *
  * @size: Size of the heap (number of nodes)
