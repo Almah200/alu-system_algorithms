@@ -26,20 +26,20 @@ child = current->right;
 if (heap->data_cmp(current->data, child->data) > 0)
 
 {
-    temp = current->data;
-    current->data = child->data;
-    child->data = temp;
-    current = child;
+temp = current->data;
+current->data = child->data;
+child->data = temp;
+current = child;
 
-    }
+}
 
-     else
-     
-    {
-        
-        break;
-        }
-    }
+else
+
+{
+
+break;
+}
+}
 }
 /**
  * heap_extract - Extracts the root value of a Min Binary Heap.
@@ -53,7 +53,7 @@ void *data;
 
 if (!heap || !heap->root)
 
-return NULL;
+return (NULL);
 
 root = heap->root;
 data = root->data;
@@ -61,18 +61,18 @@ data = root->data;
 last = root;
 while (last->left)
 {
-    if (last->right && last->right->parent == last)
-    last = last->right;
-    else
-    last = last->left;
+if (last->right && last->right->parent == last)
+last = last->right;
+else
+last = last->left;
 }
 
 if (last != root)
 {
-    last->parent->left = NULL;
-    last->parent = root->parent;
-    last->left = root->left;
-    last->right = root->right;
+last->parent->left = NULL;
+last->parent = root->parent;
+last->left = root->left;
+last->right = root->right;
 
 if (root->left)
 root->left->parent = last;
@@ -88,14 +88,14 @@ root->parent->right = last;
 }
 else
 {
-    heap->root = last;
+heap->root = last;
 }
 
 heapify_down(heap);
 }
 else
 {
-    heap->root = NULL;
+heap->root = NULL;
 }
 
 free(root);
