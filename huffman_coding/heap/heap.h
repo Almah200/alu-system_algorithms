@@ -37,6 +37,19 @@ typedef struct heap_s
 	binary_tree_node_t *root;
 } heap_t;
 
+/* New */
+/**
+ * struct symbol - Represents a symbol with associated frequency.
+ *
+ * @data: The data or character represented by the symbol.
+ * @freq: The frequency associated with the symbol.
+ */
+typedef struct symbol
+{
+char data;
+size_t freq;
+} symbol_t;
+
 /*Proto types*/
 heap_t *heap_create(int (*data_cmp)(void *, void *));
 binary_tree_node_t *binary_tree_node(binary_tree_node_t *parent, void *data);

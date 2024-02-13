@@ -1,3 +1,4 @@
+
 #ifndef SYMBOL_H
 #define SYMBOL_H
 
@@ -5,13 +6,18 @@
 #include "heap/heap.h"
 
 /**
- * struct symbol - Data structure.
- * @data: The data to be stored in the structure.
- * @freq: The frequency associated with the data.
+ * struct symbol - Represents a symbol with associated frequency.
+ * @data: The data or character represented by the symbol.
+ * @freq: The frequency associated with the symbol.
  */
+typedef struct symbol
+{
+char data;
+size_t freq;
+} symbol_t;
 
 /**
- *symbol_t - Creates a symbol_t data structure.
+ * symbol_create - Creates a symbol_t data structure.
  * @data: The data to be stored in the structure.
  * @freq: Its associated frequency.
  *
@@ -19,12 +25,15 @@
  */
 symbol_t *symbol_create(char data, size_t freq)
 {
-symbol_t newSymbol = malloc(sizeof(symbol_t));
+symbol_t *newSymbol = malloc(sizeof(symbol_t));
+
 if (newSymbol)
 {
 newSymbol->data = data;
 newSymbol->freq = freq;
 }
-return (*newSymbol);
+
+return (newSymbol);
 }
+
 #endif /* SYMBOL_H */
