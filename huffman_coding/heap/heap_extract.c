@@ -17,21 +17,21 @@ current = heap->root;
 
 while (current->left)
 {
-    child = current->left;
+child = current->left;
+
+if (current->right && heap->data_cmp(current->right->data, current->left->data) < 0)
+
+child = current->right;
+
+if (heap->data_cmp(current->data, child->data) > 0)
+  
+{
+    temp = current->data;
+    current->data = child->data;
+    child->data = temp;
+    current = child;
     
-    if (current->right && heap->data_cmp(current->right->data, current->left->data) < 0)
-    
-    child = current->right;
-    
-    if (heap->data_cmp(current->data, child->data) > 0)
-    
-    {
-        temp = current->data;
-        current->data = child->data;
-        child->data = temp;
-        current = child;
-        
-        }
+    }
         
         else
         
