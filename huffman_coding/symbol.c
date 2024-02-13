@@ -9,14 +9,9 @@
  * @data: The data to be stored in the structure.
  * @freq: The frequency associated with the data.
  */
-typedef struct symbol
-{
-char data;
-size_t freq;
-} symbol_t;
 
 /**
- * symbol_create - Creates a symbol_t data structure.
+ *symbol_t - Creates a symbol_t data structure.
  * @data: The data to be stored in the structure.
  * @freq: Its associated frequency.
  *
@@ -24,12 +19,12 @@ size_t freq;
  */
 symbol_t *symbol_create(char data, size_t freq)
 {
-symbol_t *new_symbol = (symbol_t *)malloc(sizeof(symbol_t));
-if (new_symbol)
+symbol_t newSymbol = malloc(sizeof(symbol_t));
+if (newSymbol)
 {
-new_symbol->data = data;
-new_symbol->freq = freq;
+newSymbol->data = data;
+newSymbol->freq = freq;
 }
-return (new_symbol);
+return (*newSymbol);
 }
 #endif /* SYMBOL_H */
