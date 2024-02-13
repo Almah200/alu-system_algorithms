@@ -1,4 +1,3 @@
-
 #ifndef SYMBOL_H
 #define SYMBOL_H
 
@@ -12,28 +11,28 @@
  */
 typedef struct symbol
 {
-char data;
-size_t freq;
+    char data;
+    size_t freq;
 } symbol;
 
 /**
- * symbol_create - Creates a symbol_t data structure.
+ * symbol_create - Creates a symbol data structure.
  * @data: The data to be stored in the structure.
  * @freq: Its associated frequency.
  *
- * Return: A pointer to the created symbol_t structure, or NULL if it fails.
+ * Return: A pointer to the created symbol structure, or NULL if it fails.
  */
-symbol_t *symbol_create(char data, size_t freq)
+symbol *symbol_create(char data, size_t freq)
 {
-symbol *newSymbol = malloc(sizeof(symbol_t));
+    symbol *newSymbol = malloc(sizeof(symbol));
 
-if (newSymbol)
-{
-newSymbol->data = data;
-newSymbol->freq = freq;
-}
+    if (newSymbol)
+    {
+        newSymbol->data = data;
+        newSymbol->freq = freq;
+    }
 
-return (newSymbol);
+    return newSymbol;
 }
 
 #endif /* SYMBOL_H */
