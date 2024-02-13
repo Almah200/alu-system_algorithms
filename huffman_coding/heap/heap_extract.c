@@ -6,42 +6,42 @@
  */
 static void heapify_down(heap_t *heap)
 {
-    binary_tree_node_t *current, *child;
-    void *temp;
+binary_tree_node_t *current, *child;
+void *temp;
+
+if (!heap || !heap->root)
+
+return;
+
+current = heap->root;
+
+while (current->left)
+{
+    child = current->left;
     
-    if (!heap || !heap->root)
+    if (current->right && heap->data_cmp(current->right->data, current->left->data) < 0)
     
-    return;
+    child = current->right;
     
-    current = heap->root;
+    if (heap->data_cmp(current->data, child->data) > 0)
     
-    while (current->left)
     {
-        child = current->left;
+        temp = current->data;
+        current->data = child->data;
+        child->data = temp;
+        current = child;
         
-        if (current->right && heap->data_cmp(current->right->data, current->left->data) < 0)
+        }
         
-        child = current->right;
-        
-        if (heap->data_cmp(current->data, child->data) > 0)
+        else
         
         {
-            temp = current->data;
-            current->data = child->data;
-            child->data = temp;
-            current = child;
             
-            }
+            break;
             
-            else
-            
-            {
-                break;
-                
-            }
-                
         }
     }
+}
 /**
  * heap_extract - Extracts the root value of a Min Binary Heap.
  * @heap: Pointer to the heap.
@@ -49,58 +49,59 @@ static void heapify_down(heap_t *heap)
  */
 void *heap_extract(heap_t *heap)
 {
-    binary_tree_node_t *root, *last;
-    void *data;
+binary_tree_node_t *root, *last;
+void *data;
 
-    if (!heap || !heap->root)
-        return NULL;
+if (!heap || !heap->root)
 
-    root = heap->root;
-    data = root->data;
+return NULL;
 
-    last = root;
-    while (last->left)
-    {
-        if (last->right && last->right->parent == last)
-            last = last->right;
-        else
-            last = last->left;
-    }
+root = heap->root;
+data = root->data;
 
-    if (last != root)
-    {
-        last->parent->left = NULL;
-        last->parent = root->parent;
-        last->left = root->left;
-        last->right = root->right;
-
-        if (root->left)
-            root->left->parent = last;
-        if (root->right)
-            root->right->parent = last;
-
-        if (root->parent)
-        {
-            if (root->parent->left == root)
-                root->parent->left = last;
-            else
-                root->parent->right = last;
-        }
-        else
-        {
-            heap->root = last;
-        }
-
-        heapify_down(heap);
-    }
+last = root;
+while (last->left)
+{
+    if (last->right && last->right->parent == last)
+    last = last->right;
     else
-    {
-        heap->root = NULL;
-    }
+    last = last->left;
+}
 
-    free(root);
-    
-    heap->size--;
+if (last != root)
+{
+    last->parent->left = NULL;
+    last->parent = root->parent;
+    last->left = root->left;
+    last->right = root->right;
 
-    return data;
+if (root->left)
+root->left->parent = last;
+if (root->right)
+root->right->parent = last;
+
+if (root->parent)
+{
+if (root->parent->left == root)
+root->parent->left = last;
+else
+root->parent->right = last;
+}
+else
+{
+    heap->root = last;
+}
+
+heapify_down(heap);
+}
+else
+{
+    heap->root = NULL;
+}
+
+free(root);
+
+heap->size--;
+
+return data;
 }
