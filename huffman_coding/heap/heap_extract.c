@@ -33,6 +33,7 @@ static void heapify_down(heap_t *heap)
             break;
         }
     }
+heap->size--;
 }
 
 /**
