@@ -2,6 +2,7 @@
 #define SYMBOL_H
 
 #include <stdlib.h>
+#include "heap/heap.h"
 
 /**
  * struct symbol - Data structure.
