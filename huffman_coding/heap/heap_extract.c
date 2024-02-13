@@ -33,7 +33,6 @@ static void heapify_down(heap_t *heap)
             break;
         }
     }
-heap->size--;
 }
 
 /**
@@ -93,6 +92,9 @@ void *heap_extract(heap_t *heap)
     }
 
     free(root);
+    
+    heap->size--;
 
     return data;
 }
+
