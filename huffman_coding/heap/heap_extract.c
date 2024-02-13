@@ -92,15 +92,8 @@ void *heap_extract(heap_t *heap)
     }
 
     free(root);
-
+    
     heap->size--;
 
     return data;
-
-    printf("\nHeap size: %lu\n", heap->size);
-    if (heap->root)
-        binary_tree_print(heap->root, NULL, 0);
-
-    return data;
 }
-
