@@ -60,16 +60,9 @@ void *heap_extract(heap_t *heap)
             last = last->left;
     }
 
-    if (last->parent)
-    {
-        if (last->parent->left == last)
-            last->parent->left = NULL;
-        else
-            last->parent->right = NULL;
-    }
-
     if (last != root)
     {
+        last->parent->left = NULL;
         last->parent = root->parent;
         last->left = root->left;
         last->right = root->right;
