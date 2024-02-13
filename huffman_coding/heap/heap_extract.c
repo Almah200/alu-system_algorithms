@@ -8,33 +8,40 @@ static void heapify_down(heap_t *heap)
 {
     binary_tree_node_t *current, *child;
     void *temp;
-
+    
     if (!heap || !heap->root)
-        return;
-
+    
+    return;
+    
     current = heap->root;
-
+    
     while (current->left)
     {
         child = current->left;
-
+        
         if (current->right && heap->data_cmp(current->right->data, current->left->data) < 0)
-            child = current->right;
-
+        
+        child = current->right;
+        
         if (heap->data_cmp(current->data, child->data) > 0)
+        
         {
             temp = current->data;
             current->data = child->data;
             child->data = temp;
             current = child;
-        }
-        else
-        {
-            break;
+            
+            }
+            
+            else
+            
+            {
+                break;
+                
+            }
+                
         }
     }
-}
-
 /**
  * heap_extract - Extracts the root value of a Min Binary Heap.
  * @heap: Pointer to the heap.
