@@ -1,54 +1,61 @@
-#include "heap/heap.h"
-#include <stdlib.h>
+#include "huffman.h"
+#include "heap.h"
 
 /**
- * huffman_priority_queue - Creates a priority queue.
- * @data: Array of characters.
- * @freq: Array containing associated frequencies.
- * @size: Size of the arrays.
+ * freq_cmp - Compares the frequencies of two symbols for heap ordering.
  *
- * Return: Pointer to the created min heap (priority queue).
+ * @fqa: Pointer to the first symbol.
+ * @fqb: Pointer to the second symbol.
+ *
+ * Return: The difference in frequencies (f1 - f2).
+ */
+int freq_cmp(void *fqa, void *fqb)
+{
+	symbol_t *symla, *symlb;
+	binary_tree_node_t *nodea, *nodeb;
+
+	nodea = (binary_tree_node_t *)fqa;
+	nodeb = (binary_tree_node_t *)fqb;
+	symla = (symbol_t *)nodea->data;
+	symlb = (symbol_t *)nodeb->data;
+
+	return ((int)symla->freq - (int)symlb->freq);
+}
+
+/**
+ * huffman_priority_queue - creates a priority queue
+ *							for the Huffman coding algorithm
+ * @data: array of characters of size size
+ * @freq: array containing the associated frequencies (of size size too)
+ * @size: size of queue
+ * Return: pointer to the created min heap (also called priority queue)
  */
 heap_t *huffman_priority_queue(char *data, size_t *freq, size_t size)
 {
-heap_t *priority_queue = NULL;
-binary_tree_node_t *node = NULL;
-heap_t *symbol = NULL;
-size_t i;
+	symbol_t *syml = NULL;
+	heap_t *new_heap = NULL;
+	binary_tree_node_t *new_node = NULL;
+	size_t index = 0;
 
-if (!data || !freq || size == 0)
-return (NULL);
+	new_heap = heap_create(freq_cmp);
 
-priority_queue = heap_create(*data);
-if (!priority_queue)
-return (NULL);
+	if (!new_heap)
+		return (NULL);
+	new_heap->root = NULL;
 
-for (i = 0; i < size; i++)
-{
-node = binary_tree_node(NULL, NULL);
-if (!node)
-{
-heap_delete(priority_queue, NULL);
-return (NULL);
-}
+	while (index < size)
+	{
+		syml = symbol_create(data[index], freq[index]);
+		new_node = binary_tree_node(NULL, syml);
 
-symbol = symbol_create(data[i], freq[i]);
-if (!symbol)
-{
-free(node);
-heap_delete(priority_queue, NULL);
-return (NULL);
-}
+		if (!heap_insert(new_heap, new_node))
+		{
+			free(syml);
+			free(new_node);
+			return (NULL);
+		}
+		index++;
+	}
 
-node->data = symbol;
-if (heap_insert(priority_queue, node) == NULL)
-{
-free(node);
-symbol_delete(symbol);
-heap_delete(priority_queue, NULL);
-return (NULL);
-}
-}
-
-return (priority_queue);
+	return (new_heap);
 }
