@@ -1,19 +1,4 @@
-#ifndef SYMBOL_H
-#define SYMBOL_H
-
-#include <stdlib.h>
 #include "huffman.h"
-
-/**
- * struct symbol - Represents a symbol with associated frequency.
- * @data: The data or character represented by the symbol.
- * @freq: The frequency associated with the symbol.
- */
-typedef struct symbol
-{
-    char data;
-    size_t freq;
-} symbol_t;
 
 /**
  * symbol_create - Creates a symbol data structure.
@@ -24,14 +9,15 @@ typedef struct symbol
  */
 symbol_t *symbol_create(char data, size_t freq)
 {
-    symbol_t *newSymbol = malloc(sizeof(symbol_t));
+symbol_t *newsymbol;
 
-    if (newSymbol)
-    {
-        newSymbol->data = data;
-        newSymbol->freq = freq;
-        }
-        return (newSymbol);
+newsymbol = malloc(sizeof(symbol_t));
+
+if (!newsymbol)
+
+return (NULL);
+newsymbol->data = data;
+newsymbol->freq = freq;
+
+return (newsymbol);
 }
-
-#endif /* SYMBOL_H */
