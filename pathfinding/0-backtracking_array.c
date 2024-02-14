@@ -1,70 +1,99 @@
 #include "pathfinding.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 /**
- * print_free_path - Unstacks the queue to discover the path from the starting
- * vertex to the target vertex. Also deallocates the queue.
- *
- * @path: Queue containing the path
- */
-static void print_free_path(queue_t *path)
+* backtracking_array - backtracking algorithm
+* @map: map
+* @rows: the number of rows
+* @cols: the number of columns
+* @begin: the start point
+* @end: the target point
+* Return: queue of points
+*/
+queue_t *backtracking_array(char **map, int rows, int cols,
+
+							point_t const *begin, point_t const *end)
 {
-    printf("Path found:\n");
-    while (path->front)
-    {
-        point_t *point = (point_t *)dequeue(path);
-        printf(" [%d, %d]\n", point->x, point->y);
-        free(point);
-    }
-    free(path);
+	queue_t *path = queue_create(), *reverse_path = queue_create();
+	char **mymap;
+
+	int a;
+
+	point_t *point;
+
+	if (!path || !reverse_path)
+		return (NULL);
+	mymap = malloc(rows * sizeof(char *));
+	if (!mymap)
+		exit(1);
+	for (a = 0; a < rows; a++)
+	{
+		mymap[a] = malloc(cols + 1);
+		if (!mymap[a])
+			exit(1);
+		strcpy(mymap[a], map[a]);
+	}
+
+	if (backtrack(mymap, rows, cols, end, begin->x, begin->y, path))
+	{
+		while ((point = dequeue(path)))
+			queue_push_front(reverse_path, point);
+		free(path);
+	}
+	else
+	{
+		free(path);
+		free(reverse_path);
+		reverse_path = NULL;
+	}
+	for (a = 0; a < rows; a++)
+		free(mymap[a]);
+	free(mymap);
+	return (reverse_path);
 }
 
 /**
- * master - Backtracking using an array. Here the array is chosen to demonstrate
- * that Backtracking is a really bad algorithm. The target point is just
- * down-right from the starting point, but since we first check the right cell,
- * then top, then left, then bottom, our algo will almost go through the whole
- * maze before finding a path.
- * Don't use backtracking. Backtracking is bad.
- */
-int master(void)
+* backtrack - backtracking algorithm
+* @map: map
+* @rows: number of rows
+* @cols: number of columns
+* @end: target point
+* @k: current k
+* @l: current l
+* @path: path
+* Return: 1 on success, 0 on failure
+*/
+int backtrack(char **map, int rows, int cols, point_t const *end,
+
+			int k, int l, queue_t *path)
 {
-    char *map[21] = {
-        "111111111111111111111",
-        "101000000000001000001",
-        "101011111111101110101",
-        "100010000010001000101",
-        "111111111010111011101",
-        "101000000010100010001",
-        "101011111010111011111",
-        "101000001010001000001",
-        "101110111011101111101",
-        "101000001000100000101",
-        "101011111110111110101",
-        "101000000010000010001",
-        "101111101111101111101",
-        "000000001000001000001",
-        "111011111010101011111",
-        "100010100010101000001",
-        "101110101111111110111",
-        "100000101000000000001",
-        "101111101011111111101",
-        "100000100000000010001",
-        "111110111111111111111"
-    };
-    point_t start = { 0, 13 };
-    point_t target = { 5, 20 };
-    queue_t *path;
+	point_t *point;
 
-    path = backtracking_array((char **)map, 21, 21, &start, &target);
-    if (!path)
-    {
-        fprintf(stderr, "Failed to retrieve path\n");
-        return (EXIT_FAILURE);
-    }
+	if (k < 0 || k >= cols || l < 0 || l >= rows || map[l][k] != '0')
+		return (0);
 
-    print_free_path(path);
+	map[l][k] = '1';
 
-    return (EXIT_SUCCESS);
+	point = calloc(1, sizeof(*point));
+
+	if (!point)
+		exit(1);
+
+	point->x = k;
+	point->y = l;
+
+	queue_push_front(path, point);
+	printf("Checking coordinates [%d, %d]\n", k, l);
+
+	if (k == end->x && l == end->y)
+		return (1);
+
+	if (backtrack(map, rows, cols, end, k + 1, l, path) ||
+		backtrack(map, rows, cols, end, k, l + 1, path) ||
+		backtrack(map, rows, cols, end, k - 1, l, path) ||
+		backtrack(map, rows, cols, end, k, l - 1, path))
+		return (1);
+
+	free(dequeue(path));
+
+	return (0);
 }
